@@ -1,14 +1,28 @@
 <?php
+  require 'Armes.php';
+
   class Hero
   {
     private $nom;
-    private $pv;
-    private $arme;
+    protected $pv;
+    protected $attaque;
+    protected $arme;
 
-    function __construct(string $nom)
+    function __construct($nom)
     {
-      $this->$nom = $nom;
-      $this->$pv = 100;
+      $this->nom = $nom;
+      echo "Nom du Hero:\t" . $this->nom . "\n";
+    }
+
+    public function newarme($nomarme)
+    {
+      $this->arme = new Arme($nomarme);
+    }
+
+    public function Attaque($victime)
+    {
+     $victime->pv -= $this->attaque;
+     echo $victime->getNom() . " a perdu " . $this->getAttaque() . " pv\n" ;
     }
 
     public function getNom(){return $this->nom;}
@@ -17,34 +31,11 @@
     public function getPv(){return $this->pv;}
     public function setPv($pv){$this->pv = $pv;return $this;}
 
-  }
-
-  class Guerrier extends Hero
-  {
-    function __construct()
-    {
-      $this->arme = "Epee";
-    }
+    public function getAttaque(){return $this->attaque;}
+    public function setAttaque($attaque){$this->attaque = $attaque;return $this;}
 
     public function getArme(){return $this->arme;}
     public function setArme($arme){$this->arme = $arme;return $this;}
+
   }
-
-  class Viking extends Hero
-  {
-    function __construct()
-    {
-      $this->arme = "Hache";
-    }
-
-    public function getArme(){return $this->arme;}
-    public function setArme($arme){$this->arme = $arme;return $this;}
-  }
-
-  $Noctis = new Guerrier("Noctis");
-  $Gladio = new Viking("Gladio");
-
-  echo $Noctis->getArme();
-  echo "\n";
-  echo $Gladio->getArme();
 ?>
