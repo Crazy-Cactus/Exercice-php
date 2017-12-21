@@ -21,8 +21,12 @@
 
     public function Attaque($victime)
     {
-     $victime->pv -= $this->attaque;
-     echo $victime->getNom() . " a perdu " . $this->getAttaque() . " pv\n" ;
+      foreach ($this->arme->getArmeEquipe() as $key => $value)
+      {
+        $armePA = $value['PA'];
+      }
+      $victime->pv -= $this->attaque + $armePA;
+      echo $victime->getNom() . " a perdu " . $this->getAttaque() . " + " . $armePA . " pv\n" ;
     }
 
     public function getNom(){return $this->nom;}
